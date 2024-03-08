@@ -25,10 +25,8 @@ export default async function handleRequest(req: Request & { nextUrl?: URL }) {
   }
 
   const { pathname, search } = req.nextUrl ? req.nextUrl : new URL(req.url);
-  const url = new URL(pathname + search, "https://openrouter.ai/api").href;
+  const url = new URL("/api" + pathname + search, "https://openrouter.ai").href;
   const headers = pickHeaders(req.headers, ["content-type", "authorization"]);
-
-  console.log(url);
 
   const res = await fetch(url, {
     body: req.body,
